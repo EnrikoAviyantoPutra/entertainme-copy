@@ -14,9 +14,11 @@ class TvSerie {
     return getDatabase().collection('tvSeries').findOne({_id: ObjectId(id)})
   }
   static update(id, body) {
-    return getDatabase().collection('tvSeries').updateOne(
+    return getDatabase().collection('tvSeries').findOneAndUpdate(
       { _id: ObjectId(id) },
-      { $set: body }
+      { $set: body },
+      { returnNewDocument: true}
+
     )
   }
   static deleteId(id) {

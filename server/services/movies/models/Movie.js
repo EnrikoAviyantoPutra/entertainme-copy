@@ -11,16 +11,17 @@ class Movie {
     return getDatabase().collection('movies').insertOne(movie)
   }
   static findId(id) {
-    return getDatabase().collection('movies').findOne({_id: ObjectId(id)})
+    return getDatabase().collection('movies').findOne({ _id: ObjectId(id) })
   }
   static update(id, body) {
-    return getDatabase().collection('movies').updateOne(
+    return getDatabase().collection('movies').findOneAndUpdate(
       { _id: ObjectId(id) },
-      { $set: body }
+      { $set: body },
+      { returnNewDocument: true }
     )
   }
   static deleteId(id) {
-    return getDatabase().collection('movies').deleteOne({_id: ObjectId(id)})
+    return getDatabase().collection('movies').deleteOne({ _id: ObjectId(id) })
   }
 }
 
