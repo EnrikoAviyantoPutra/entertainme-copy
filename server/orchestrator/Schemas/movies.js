@@ -19,7 +19,6 @@ module.exports = {
     movies: [Movie]
     findMovie (id: ID!): [Movie]
   }
-
   
   input movie {
     title: String
@@ -28,6 +27,7 @@ module.exports = {
     popularity: Float
     tags: [String] 
   } 
+  
 
   extend type Mutation {
     createMovie(input: movie ): Movie
@@ -81,6 +81,7 @@ module.exports = {
       async createMovie(_, args) {
 
         try {
+          console.log(args,'>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> INI DATA ARGS INPUT')
           await redis.del("movies:data")
           const { data } = await axios.post('http://localhost:4001/movies', args.input)
           console.log('ini data dari service createMovie', data)
@@ -90,6 +91,7 @@ module.exports = {
         }
       },
       async deleteMovie(_, args) {
+        console.log(args, '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<delete di clietn');
         try {
           await redis.del("movies:data")
           const { data } = await axios.delete(`http://localhost:4001/movies/${args.id}`)

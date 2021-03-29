@@ -4,6 +4,7 @@ import client from './config/index'
 import Home from './pages/Home'
 import Navbar from './components/Navbar'
 import Favorite from './pages/Favorite'
+import Detail from './pages/Detail'
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,6 +19,9 @@ function App() {
           <div>
             <Navbar />
             <Switch>
+              <Route path="/detail/:id">
+                <Detail />
+              </Route>
               <Route path="/favorite">
                 <Favorite />
               </Route>
